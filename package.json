@@ -1,0 +1,35 @@
+{
+  "name": "postcss-preset-cck",
+  "version": "1.0.0",
+  "description": "Postcss preset for CCK-UI applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "postcss": ">=8.0.0"
+  },
+  "dependencies": {
+    "postcss-mixins": "^12.1.2",
+    "postcss-nested": "^7.0.2"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.15",
+    "typescript": "^6.0.3"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json && echo 'declare module \"postcss-preset-cck\";' > dist/index.d.ts",
+    "clean": "rimraf dist",
+    "release": "tsx scripts/release",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.9.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module"
+}

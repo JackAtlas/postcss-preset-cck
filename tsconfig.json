@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": false
+  },
+  "include": ["./scripts", "./src"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/test/**"]
+}
