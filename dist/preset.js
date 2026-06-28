@@ -83,17 +83,17 @@ const rtlWhereMixin = {
     }
 };
 const ltrWhereMixin = {
-    ':where([dir="ltr]) &': {
+    ':where([dir="ltr"]) &': {
         '@mixin-content': {}
     }
 };
 const notRtlWhereMixin = {
-    ':where([dir="ltr"]) &': {
+    ':where(:not([dir="rtl"])) &': {
         '@mixin-content': {}
     }
 };
 const notLtrWhereMixin = {
-    ':where([dir="ltr"]) &': {
+    ':where(:not([dir="ltr"])) &': {
         '@mixin-content': {}
     }
 };

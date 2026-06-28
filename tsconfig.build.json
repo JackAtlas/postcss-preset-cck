@@ -9,7 +9,8 @@
     "strict": true,
     "esModuleInterop": true,
     "declaration": false,
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
