@@ -1,0 +1,85 @@
+import path from 'node:path'
+import chalk from 'chalk'
+import fs from 'fs-extra'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import { simpleGit } from 'simple-git'
+import { $ } from 'zx'
+import consola from 'consola'
+import { getNextVersion, VersionIncrement, VersionStage } from 'version-next'
+import { run } from './run'
+import { updateVersion } from './update-version'
+
+const packageJsonPath = path.join(process.cwd(), 'package.json')
+const packageJson = fs.readJsonSync(packageJsonPath)
+const { argv } = yargs(hideBin(process.argv)) as any
+const git = simpleGit()
+
+const versionIncrement: VersionIncrement = argv._[0] || 'patch'
+const versionStage: VersionStage | undefined = argv.stage
+
+async function release() {
+  await run(git.pull(), {
+    info: 'Pulling the latest changes from the remote repository',
+    success: 'The latest changes have been pulled from the remote repository',
+    error: 'Failed to pull the latest changes from the remote repository'
+  })
+
+  const gitStatus = await git.status()
+
+  if (gitStatus.files.length > 0) {
+    consola.error(
+      'Working directory is not clean, commit all changes before publishing the package.'
+    )
+    process.exit(1)
+  }
+
+  const nextVersion = getNextVersion(packageJson.version, {
+    type: versionIncrement,
+    stage: versionStage
+  })
+
+  consola.info(
+    `Publishing next ${chalk.cyan(versionIncrement)} version of ${chalk.cyan(packageJson.name)} to npm.`
+  )
+
+  consola.info(
+    `Current version: ${chalk.cyan(packageJson.version)}, next version: ${chalk.cyan(nextVersion)}`
+  )
+
+  await run($`pnpm install`, {
+    info: 'Installing fresh dependencies',
+    success: 'Fresh dependencies have been installed',
+    error: 'Failed to install fresh dependencies'
+  })
+
+  await run($`pnpm clean`, {
+    info: 'Removing dist directory',
+    success: 'dist directory has been removed',
+    error: 'Failed to remove dist directory'
+  })
+
+  await run($`pnpm build`, {
+    info: 'Building the package',
+    success: 'The package has been built',
+    error: 'Failed to build the package'
+  })
+
+  const revertVersion = await updateVersion(nextVersion)
+
+  await run(
+    $`pnpm publish --access public --tag ${versionStage ? 'next' : 'latest'}`,
+    {
+      info: 'Publishing the package to npm',
+      success: 'The package has been published to npm',
+      error: 'Failed to publish the package to npm'
+    },
+    revertVersion
+  )
+
+  await git.add([packageJsonPath])
+  await git.commit(`Release ${nextVersion}`)
+  await git.push()
+}
+
+release()

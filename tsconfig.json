@@ -2,13 +2,13 @@
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
     "outDir": "./dist",
-    "rootDir": "./src",
     "target": "esnext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
-    "declaration": false
+    "declaration": false,
+    "types": ["node"]
   },
   "include": ["./scripts", "./src"],
   "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/test/**"]
