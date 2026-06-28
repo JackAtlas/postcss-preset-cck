@@ -47,19 +47,19 @@ async function release() {
     `Current version: ${chalk.cyan(packageJson.version)}, next version: ${chalk.cyan(nextVersion)}`
   )
 
-  await run($`pnpm install`, {
+  await run($`npm install`, {
     info: 'Installing fresh dependencies',
     success: 'Fresh dependencies have been installed',
     error: 'Failed to install fresh dependencies'
   })
 
-  await run($`pnpm clean`, {
+  await run($`npm run clean`, {
     info: 'Removing dist directory',
     success: 'dist directory has been removed',
     error: 'Failed to remove dist directory'
   })
 
-  await run($`pnpm build`, {
+  await run($`npm run build`, {
     info: 'Building the package',
     success: 'The package has been built',
     error: 'Failed to build the package'
@@ -68,7 +68,7 @@ async function release() {
   const revertVersion = await updateVersion(nextVersion)
 
   await run(
-    $`pnpm publish --access public --tag ${versionStage ? 'next' : 'latest'}`,
+    $`npm publish --access public --tag ${versionStage ? 'next' : 'latest'}`,
     {
       info: 'Publishing the package to npm',
       success: 'The package has been published to npm',
