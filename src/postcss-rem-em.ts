@@ -1,5 +1,5 @@
 import { atRule, type AtRule, type Root } from 'postcss'
-import converters from './converters'
+import converters from './converters.js'
 
 const getRegExp = (units: 'rem' | 'em') =>
   new RegExp('\\b' + units + '\\(([^()]+)\\)', 'g')

@@ -1,5 +1,5 @@
 import { Declaration } from 'postcss'
-import unisConverters from './converters'
+import unisConverters from './converters.js'
 
 const rem = unisConverters.remStrict
 

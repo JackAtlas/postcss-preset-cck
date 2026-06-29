@@ -1,10 +1,10 @@
 import nested from 'postcss-nested'
 import mixins from 'postcss-mixins'
-import remEm from './postcss-rem-em'
-import colorMixAlpha from './postcss-color-mix'
-import lightDark from './postcss-light-dark'
-import converters from './converters'
-import autorem from './auto-rem'
+import remEm from './postcss-rem-em.js'
+import colorMixAlpha from './postcss-color-mix.js'
+import lightDark from './postcss-light-dark.js'
+import converters from './converters.js'
+import autorem from './auto-rem.js'
 import { AtRule } from 'postcss'
 
 function colorSchemeMixin(
