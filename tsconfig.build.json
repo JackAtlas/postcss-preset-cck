@@ -5,10 +5,11 @@
     "rootDir": "./src",
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "nodenext",
     "strict": true,
     "esModuleInterop": true,
-    "declaration": false,
+    "declaration": true,
+    "declarationMap": true,
     "types": ["node"],
     "skipLibCheck": true
   },

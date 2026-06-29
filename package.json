@@ -4,6 +4,12 @@
   "description": "Postcss preset for CCK-UI applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "peerDependencies": {
     "postcss": ">=8.0.0"
   },
@@ -30,10 +36,10 @@
     "zx": "^8.8.5"
   },
   "scripts": {
-    "build": "npx tsc --project tsconfig.build.json && echo 'declare module \"postcss-preset-cck\";' > dist/index.d.ts",
+    "build": "tsc --project tsconfig.build.json",
     "clean": "rimraf dist",
     "release": "tsx scripts/release",
-    "typecheck": "npx tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
