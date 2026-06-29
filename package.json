@@ -1,6 +1,6 @@
 {
   "name": "postcss-preset-cck",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Postcss preset for CCK-UI applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
