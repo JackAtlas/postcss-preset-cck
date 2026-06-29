@@ -11,6 +11,7 @@
     "postcss-mixins": "^12.1.2",
     "postcss-nested": "^7.0.2"
   },
+  "files": ["dist", "README.md"],
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^26.0.1",
