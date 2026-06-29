@@ -210,12 +210,7 @@ const plugin = (options: Options = {}) => {
     )
   }
 
-  return {
-    postcssPlugin: 'postcss-preset-cck',
-    plugins
-  }
+  return plugins
 }
-
-plugin.postcss = true
 
 export default plugin
